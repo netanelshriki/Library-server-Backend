@@ -2,6 +2,7 @@ package com.net.demoTokenLib.security;
 
 import com.net.demoTokenLib.beans.ClientType;
 import com.net.demoTokenLib.services.BorrowerService;
+import com.net.demoTokenLib.services.EmployeeService;
 import com.net.demoTokenLib.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
@@ -25,8 +26,12 @@ public class LoginManager {
                     return userService;
                 }
             case EMPLOYEE:
+                userService = (UserService) ctx.getBean(EmployeeService.class);
+                if (userService.login(email, password)) {
+                    return userService;
+                }
+
         }
         throw new Exception("......");
     }
-
 }

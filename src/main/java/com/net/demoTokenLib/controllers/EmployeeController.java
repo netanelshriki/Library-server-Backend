@@ -1,6 +1,7 @@
 package com.net.demoTokenLib.controllers;
 
 import com.net.demoTokenLib.beans.Book;
+import com.net.demoTokenLib.beans.User;
 import com.net.demoTokenLib.services.BorrowerService;
 import com.net.demoTokenLib.services.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,11 @@ public class EmployeeController extends LibraryController{
 
     public EmployeeController(EmployeeService employeeService, BorrowerService borrowerService) {
         super(employeeService, borrowerService);
+    }
+
+    @Override
+    public boolean register(User user) {
+        return false;
     }
 
     @PostMapping("books")

@@ -1,5 +1,6 @@
 package com.net.demoTokenLib.controllers;
 
+import com.net.demoTokenLib.beans.User;
 import com.net.demoTokenLib.services.BorrowerService;
 import com.net.demoTokenLib.services.EmployeeService;
 import lombok.Data;
@@ -10,9 +11,12 @@ public abstract class LibraryController {
 
     protected EmployeeService employeeService;
     protected BorrowerService borrowerService;
-@Autowired
+
+    @Autowired
     public LibraryController(EmployeeService employeeService, BorrowerService borrowerService) {
         this.employeeService = employeeService;
         this.borrowerService = borrowerService;
     }
+
+    public abstract boolean register(User user);
 }
