@@ -11,4 +11,5 @@ public interface EmployeeService {
     void deleteBook(int id);
     Book getOneBook(int id);
     List<Book> getAllBooks();
+    void deleteEmployee(int id);
 }

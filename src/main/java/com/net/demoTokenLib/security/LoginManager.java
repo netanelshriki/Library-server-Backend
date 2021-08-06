@@ -1,6 +1,7 @@
 package com.net.demoTokenLib.security;
 
 import com.net.demoTokenLib.beans.ClientType;
+import com.net.demoTokenLib.exceptions.ErrorMsg;
 import com.net.demoTokenLib.services.BorrowerService;
 import com.net.demoTokenLib.services.EmployeeService;
 import com.net.demoTokenLib.services.UserService;
@@ -32,6 +33,6 @@ public class LoginManager {
                 }
 
         }
-        throw new Exception("......");
+        throw new Exception(ErrorMsg.INVALID_EMAIL_OR_PASS.getDescription());
     }
 }
