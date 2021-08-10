@@ -37,6 +37,11 @@ public class EmployeeServiceImpl extends UserService implements EmployeeService 
     }
 
     @Override
+    public void deleteEmployee(int id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public boolean login(String email, String password) {
         return userRepository.existsByEmailAndPassword(email, password);
     }
