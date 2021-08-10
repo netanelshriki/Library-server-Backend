@@ -87,4 +87,14 @@ public class EmployeeController extends LibraryController {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("employees/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable int id) {
+        return new ResponseEntity<>(userRepository.getById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("employees/update")
+    public ResponseEntity<?> UpdatesEmployee(@RequestBody User user) {
+        userRepository.saveAndFlush(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }
