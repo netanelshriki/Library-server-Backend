@@ -40,6 +40,10 @@ public class InitData implements CommandLineRunner {
         Book b5 = Book.builder()
                 .bookName("the french revolution")
                 .build();
+        Book b6 = Book.builder()
+                .bookName("networking")
+                .build();
+
 
         User u1 = User.builder()
                 .name("john")
@@ -52,7 +56,7 @@ public class InitData implements CommandLineRunner {
 
 
 
-        bookRepository.saveAll(Arrays.asList(b1,b2,b3,b4,b5));
+        bookRepository.saveAll(Arrays.asList(b1,b2,b3,b4,b5,b6));
 
 
     }
