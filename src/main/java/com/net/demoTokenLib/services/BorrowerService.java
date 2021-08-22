@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface BorrowerService {
 
-Book getOneBook(int id);
-List<Book> getAllBooks();
+    Book getOneBook(int id);
+    List<Book> getAllBooks();
 }

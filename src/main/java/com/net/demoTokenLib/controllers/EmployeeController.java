@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
@@ -32,7 +33,21 @@ public class EmployeeController extends LibraryController {
     @Override
     public ResponseEntity<?> register(@RequestBody User user) {
         userRepository.save(user);
-        return new ResponseEntity<>(tokenManager.addToken(user), HttpStatus.CREATED);
+        tokenManager.addToken(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PostMapping("login")
+    @Override
+    public ResponseEntity<?> login(@RequestBody LoginDetails loginDetails) throws LibraryLoginException {
+        String email = loginDetails.getEmail();
+        String password = loginDetails.getPassword();
+
+        if (!userRepository.existsByEmailAndPassword(email, password)) {
+            throw new LibraryLoginException("sorry try again...");
+        }
+        User loginUser = userRepository.findByEmailAndPassword(email, password);
+        return new ResponseEntity<>(loginUser, HttpStatus.CREATED);
     }
 
     @DeleteMapping("logout")
@@ -41,6 +56,7 @@ public class EmployeeController extends LibraryController {
     public void logout(@RequestBody LogoutDetails logoutDetails) {
         tokenManager.removeToken(logoutDetails.getToken());
     }
+
 
     @PostMapping("books")
     @ResponseStatus(HttpStatus.CREATED)
@@ -83,8 +99,14 @@ public class EmployeeController extends LibraryController {
 
     @GetMapping("employees")
     public ResponseEntity<?> getAllUsers() {
+        List employees = new ArrayList();
+        for (User employee : userRepository.findAll()) {
+            if (employee.getClientType().equals("EMPLOYEE")) {
+                employees.add(employee);
+            }
+        }
 
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     @GetMapping("employees/{id}")

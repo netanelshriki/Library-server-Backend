@@ -20,4 +20,5 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String bookName;
+
 }

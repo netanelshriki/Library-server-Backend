@@ -33,6 +33,11 @@ public class BorrowerController extends LibraryController {
         return new ResponseEntity<>(tokenManager.addToken(user), HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<?> login(LoginDetails loginDetails) throws LibraryLoginException {
+        return null;
+    }
+
     @DeleteMapping("logout")
     @Override
     @ResponseStatus(HttpStatus.NO_CONTENT)
